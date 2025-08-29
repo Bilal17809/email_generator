@@ -19,12 +19,18 @@ const Color kWhite01 = Color(0x1AFFFFFF);
 const Color greetingsColor = Color(0xff2CA9FB);
 const Color greetingsOffsetColor = Color(0xff14679D);
 
+
 const Color jobsColor = Color(0xffBB10C1);
 const Color jobsOffsetColor = Color(0xff700E73);
 
 const Color introductionsColor = Color(0xffEF642D);
 const Color introductionsOffsetColor = Color(0xff9F380F);
-
+Color box1Color= Color(0xffE17B21);
+Color box2Color= Color(0xff7D1A71);
+Color box3Color= Color(0xff0F67BA);
+Color icon1Color= Color(0xffBA5C0A);
+Color icon2Color= Color(0xff5E0854);
+Color icon3Color= Color(0xff00386C);
 const Color favouriteRoomColor = Color(0xff5A4BCD);
 const Color favouriteRoomOffsetColor = Color(0xff180C73);
 

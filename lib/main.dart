@@ -1,7 +1,5 @@
+import 'package:email_generator/pages/home/view/home_view.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import '/pages/splash/view/splash_view.dart';
-import 'core/dependency_inject/dependency_inject.dart';
 
 void main() {
   // DependencyInject.init();
@@ -15,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return   MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: HomeView(),
     );
   }
 }
