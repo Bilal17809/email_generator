@@ -18,6 +18,7 @@ const Color kWhite01 = Color(0x1AFFFFFF);
 //Categories card colors
 const Color greetingsColor = Color(0xff2CA9FB);
 const Color greetingsOffsetColor = Color(0xff14679D);
+Color greetingsColorWithAlpha = const Color(0xFF00B6CD).withOpacity(0.08);
 
 
 const Color jobsColor = Color(0xffBB10C1);
