@@ -1,10 +1,11 @@
 import 'package:email_generator/core/constant/constant.dart';
+import 'package:email_generator/pages/tools/view/tools.dart';
 import 'package:email_generator/pages/write_mail/view/write_mail.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../../core/theme/app_colors.dart';
-import '../widget/widget.dart';
+import '../../replay_mail/view/replay_mail.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -80,82 +81,81 @@ class HomeView extends StatelessWidget {
           ),
 
           /// 🔹 Scrollable content on top
-          SingleChildScrollView(
-            padding: EdgeInsets.only(
-              top: kToolbarHeight + 20, // push below AppBar
-              bottom: kBottomNavigationBarHeight + 20, // leave space above nav bar
-            ),
-            child:Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: context.screenWidth * 0.86,
-                    height: context.screenHeight * 0.05,
-                    child: TextField(
-                      cursorHeight: 15,
-                      cursorColor: greetingsColor,
-                      decoration: InputDecoration(
-                        hint: Text("Enter your name"),
-                        prefixIcon: Icon(Icons.search, color: greetingsColor),
-                        filled: true,
-                        fillColor: kWhite,
-                        // 🔹 Custom border radius
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: greetingsColor, width: 0.5),
-                          // set your radius here
-                        ),
-                        // 🔹 Optional: when focused
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: greetingsColor, width: 0.5),
-                        ),
+          Padding(
+            padding: const EdgeInsets.only(top: 80.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: context.screenWidth * 0.86,
+                  height: context.screenHeight * 0.05,
+                  child: TextField(
+                    cursorHeight: 15,
+                    cursorColor: greetingsColor,
+                    decoration: InputDecoration(
+                      hint: Text("Enter your name"),
+                      prefixIcon: Icon(Icons.search, color: greetingsColor),
+                      filled: true,
+                      fillColor: kWhite,
+                      // 🔹 Custom border radius
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: greetingsColor, width: 0.5),
+                        // set your radius here
+                      ),
+                      // 🔹 Optional: when focused
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: BorderSide(color: greetingsColor, width: 0.5),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>WriteMail()));
+                ),
+                SizedBox(height: 10),
+                InkWell(
+                  onTap: (){
+                    Get.to(()=>WriteMail());
 
-                    },
-                    child: Container(
-                      width: context.screenWidth * 0.856,
-                      height: context.screenHeight * 0.15,
-                      decoration: BoxDecoration(
-                        color: box1Color,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        children: [
-                          SizedBox(width: 20),
-                          Container(
-                            height: context.screenHeight * 0.06,
-                            decoration: BoxDecoration(
-                              color: icon1Color,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Image.asset(
-                              "images/2.0x/pen.png",
-                              width: 40,
-                              height: 40,
-                            ),
+                  },
+                  child: Container(
+                    width: context.screenWidth * 0.856,
+                    height: context.screenHeight * 0.15,
+                    decoration: BoxDecoration(
+                      color: box1Color,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        SizedBox(width: 20),
+                        Container(
+                          height: context.screenHeight * 0.06,
+                          decoration: BoxDecoration(
+                            color: icon1Color,
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                          SizedBox(width: 20),
-                          Text(
-                            "Write Mail",
-                            style: TextStyle(fontSize: 20, color: kWhite),
+                          child: Image.asset(
+                            "images/2.0x/pen.png",
+                            width: 40,
+                            height: 40,
                           ),
-                        ],
-                      ),
+                        ),
+                        SizedBox(width: 20),
+                        Text(
+                          "Write Mail",
+                          style: TextStyle(fontSize: 20, color: kWhite),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap:(){
+                        Get.to(()=>ReplayMail());
+                      },
+                      child: Container(
                         width: context.screenWidth * 0.4,
                         height: context.screenHeight * 0.2,
                         decoration: BoxDecoration(
@@ -166,17 +166,18 @@ class HomeView extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              height: context.screenHeight * 0.06,
-                              decoration: BoxDecoration(
-                                color: icon2Color,
-                                borderRadius: BorderRadius.circular(10),
+                                height: context.screenHeight * 0.06,
+                                decoration: BoxDecoration(
+                                  color: icon2Color,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Image.asset(
+                                  "images/replay.png",
+                                  width: 40,
+                                  height: 40,
+                                ),
                               ),
-                              child: Image.asset(
-                                "images/replay.png",
-                                width: 40,
-                                height: 40,
-                              ),
-                            ),
+
                             Text(
                               "Replay Mail",
                               style: TextStyle(fontSize: 15, color: kWhite),
@@ -184,7 +185,12 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
+                    ),
+                    InkWell(
+                      onTap: (){
+                        Get.to(()=>Tools());
+                      },
+                      child: Container(
                         width: context.screenWidth * 0.4,
                         height: context.screenHeight * 0.2,
                         decoration: BoxDecoration(
@@ -214,40 +220,38 @@ class HomeView extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, top: 10),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "History",
-                        style: TextStyle(color: greetingsColor, fontSize: 20),
-                      ),
                     ),
-                  ),
-                  Lottie.asset(
-                    'images/bO2iE4P8Xn.json', // put file in assets
-                    width: 200,
-                    height: 200,
-                    repeat: true,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10, top: 10),
+                  child: Align(
+                    alignment: Alignment.topLeft,
                     child: Text(
-                      "Write Emails on the Go with\n"
-                          "\t\t\t\t\t\t\t\t\t\tthe power of AI ",
+                      "History",
+                      style: TextStyle(color: greetingsColor, fontSize: 20),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Lottie.asset(
+                  'images/bO2iE4P8Xn.json', // put file in assets
+                  width: 200,
+                  height: 200,
+                  repeat: true,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Text(
+                    "Write Emails on the Go with\n"
+                        "\t\t\t\t\t\t\t\t\t\tthe power of AI ",
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
 
-      /// 🔹 BottomNavigationBar on top of image
-      bottomNavigationBar: const MyBottomNavBar(),
     );
 
   }

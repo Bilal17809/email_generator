@@ -1,8 +1,9 @@
-import 'package:email_generator/pages/home/view/home_view.dart';
+import 'package:email_generator/core/theme/app_colors.dart';
+import 'package:email_generator/pages/home/widget/widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
-  // DependencyInject.init();
   runApp(const MyApp());
 }
 
@@ -11,9 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeView(),
+      theme: ThemeData(
+        textSelectionTheme:  TextSelectionThemeData(
+          cursorColor: greetingsColor,         // cursor color
+          selectionColor: greetingsColorWithAlpha,   // text highlight color
+          selectionHandleColor: greetingsColor, // drag handles color
+        ),
+      ),
+      home: const MyBottomNavBar(),
     );
-  }
-}
+}}
