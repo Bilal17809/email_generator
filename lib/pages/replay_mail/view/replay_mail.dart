@@ -3,20 +3,29 @@ import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/common/select_lanuage.dart';
+import '../../../core/common/tones.dart';
+import '../../write_mail/control/controller.dart';
+
+
 class ReplayMail extends StatelessWidget {
-  const ReplayMail({super.key});
+  ReplayMail({super.key});
+
+  final WriteMailController controller = Get.put(WriteMailController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kWhite,
-      extendBody: true,            // 🔹 lets body go behind BottomNavigationBar
-      extendBodyBehindAppBar: true, // 🔹
+      extendBody: true,
+      // 🔹 lets body go behind BottomNavigationBar
+      extendBodyBehindAppBar: true,
+      // 🔹
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Get.back();
           },
           child: Icon(
@@ -52,68 +61,9 @@ class ReplayMail extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   children: [
-                    Card(
-                      color: Colors.pink.shade50,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Language",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(width: 1),
-                              Icon(Icons.flag_outlined, size: 18),
-                              SizedBox(width: 1),
-                              Text(
-                                "\t English\n"
-                                    "(Canada)",
-                                style: TextStyle(fontSize: 13),
-                              ),
-                              Icon(
-                                Icons.play_circle,
-                                color: Colors.pinkAccent,
-                                size: 18,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Card(
-                      color: Colors.purple.shade100,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Tone",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              SizedBox(width: 20),
-                              Text(
-                                "Friendly",
-                                style: TextStyle(fontSize: 14),
-                              ),
-                              SizedBox(width: 3),
-                              Icon(
-                                Icons.play_circle,
-                                color: Colors.orange.shade600,
-                                size: 18,
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                    LanguageSelector(),
+
+                    ToneSelector(),
                     Card(
                       color: Colors.blue.shade50,
                       child: Column(
@@ -160,59 +110,54 @@ class ReplayMail extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 5),
-              Padding(
-                padding: const EdgeInsets.only(left: 50),
-                child: SizedBox(
-                  width: context.screenWidth * 0.73,
-                  height: context.screenHeight * 0.5,
-                  child: Card(
-                    color: greetingsColorWithAlpha,
-
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: context.screenWidth * 0.73,
+                      height: context.screenHeight * 0.5,
+                      child: Card(color: greetingsColorWithAlpha),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 40),
+                      child: Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          width: 50,
+                          height: 25,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: greetingsColor, width: 1),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: Text(
+                              "Paste",
+                              style: TextStyle(color: greetingsColor),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: greetingsColor,
+                    maximumSize: const Size(250, 60),
+                  ),
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Next", style: TextStyle(color: kWhite)),
+                      SizedBox(width: 5),
+                    ],
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 40),
-                child: Align(
-                  alignment: Alignment.bottomRight,
-                  child:Container(
-
-                    width: 50,
-                    height: 25,
-                    decoration:BoxDecoration(
-                      border: Border.all(color: greetingsColor, width: 1),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Center(child: Text("Paste",style: TextStyle(
-
-                      color: greetingsColor
-                    ),)),
-                  )
-
-                ),
-              ),
-              SizedBox(height: 5,),
-              Center(
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: greetingsColor,
-                      maximumSize: const Size(250, 60),
-                    ),
-                    onPressed: (){},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("Next"
-                          ,style: TextStyle(
-                            color: kWhite,
-
-                          ),),
-                        SizedBox(width: 5,),
-
-
-                      ],
-                    )),
-              )
             ],
           ),
         ],

@@ -1,9 +1,12 @@
 import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:email_generator/pages/home/widget/widget.dart';
+import 'package:email_generator/pages/write_mail/control/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(WriteMailController());
   runApp(const MyApp());
 }
 
