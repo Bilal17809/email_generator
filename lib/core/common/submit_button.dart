@@ -3,12 +3,16 @@ import 'package:email_generator/pages/result_write_mail/view/result_write_mail.d
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../pages/result_write_mail/controller/controller.dart';
+
 
 class SubmitButtonBar extends StatelessWidget {
   final Color greetingsColor;
   final Color kWhite;
+  final MistralController controller = Get.put(MistralController());
+  final TextEditingController textController = TextEditingController();
 
-  const SubmitButtonBar({
+   SubmitButtonBar({
     super.key,
     required this.greetingsColor,
     required this.kWhite,
@@ -32,10 +36,18 @@ class SubmitButtonBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30), // rounded button
               ),
             ),
-            onPressed: () {
+              onPressed: () {
+                if (textController.text.isNotEmpty) {
+                  controller.callMistral(
+                    prompt: textController.text,
+                    language:controller.selectedLanguage.value,
+                    tone: controller.selectedTone.value,
 
-              Get.to(()=>ResultScreen());
-            },
+                    length: controller.selectedLength.value,
+                  );
+                }
+                Get.to(() => ResultScreen());
+              },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center, // keep centered
               children: [

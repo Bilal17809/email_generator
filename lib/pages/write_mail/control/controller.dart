@@ -1,14 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class WriteMailController extends GetxController {
   var searchQuery = "".obs;
-  RxString selectedLanguage = "English".obs; // default language
+  RxString selectedLanguage = "English".obs;
+  final searchTextController = TextEditingController().obs;// default language
 
   @override
   void onInit() {
     super.onInit();
     loadLanguage();
+    searchTextController.value.text = searchQuery.value;
   }
 
   /// Save selected language to SharedPreferences
@@ -32,9 +35,15 @@ class WriteMailController extends GetxController {
   void updateSearch(String query) {
     searchQuery.value = query;
   }
+  void selectLanguage(String langName ) {
+    selectedLanguage.value = langName;
 
-  void selectLanguage(String lang) async {
-    await saveLanguage(lang); // ✅ fixed
+
+    /// Clear search
+    searchQuery.value = "";
+    searchTextController.value.clear();
+
+    /// Close bottom sheet
     Get.back();
   }
 }
