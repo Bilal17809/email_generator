@@ -38,10 +38,8 @@ class MistralController extends GetxController {
           ? 250
           : 500,
     });
-
     isLoading.value = true;
     responseText.value = "⏳ Thinking...";
-
     try {
       final response = await http.post(url, headers: headers, body: body);
 
