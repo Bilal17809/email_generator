@@ -16,7 +16,7 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.white.withOpacity(0.99),
+      backgroundColor:Colors.white.withValues(alpha: 0.99),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: InkWell(

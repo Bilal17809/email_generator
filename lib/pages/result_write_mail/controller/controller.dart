@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -48,10 +49,10 @@ class MistralController extends GetxController {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         responseText.value = data["choices"][0]["message"]["content"];
-        print("✅ Success: ${responseText.value}");
+        log("✅ Success: ${responseText.value}");
         return true;
       } else {
-        print("❌ Error Response: ${response.body}");
+        log("❌ Error Response: ${response.body}");
         responseText.value = "Error: ${response.statusCode}\n${response.body}";
         return false;
       }

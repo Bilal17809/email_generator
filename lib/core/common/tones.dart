@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,7 +60,7 @@ class ToneController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("selectedTone", tone);
     selectedTone.value = tone;
-    print("✅ Saved Tone: $tone");
+    log("✅ Saved Tone: $tone");
   }
 
   /// ✅ Load saved tone
@@ -67,7 +69,7 @@ class ToneController extends GetxController {
     final savedTone = prefs.getString("selectedTone");
     if (savedTone != null) {
       selectedTone.value = savedTone;
-      print("🔄 Loaded Tone: $savedTone");
+      log("🔄 Loaded Tone: $savedTone");
     }
   }
 }

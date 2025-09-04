@@ -1,5 +1,6 @@
+import 'dart:developer';
 import 'dart:math' as math;
-import 'package:email_generator/core/common/silder.dart';
+import 'package:email_generator/core/common/length.dart';
 import 'package:email_generator/core/common/tones.dart';
 import 'package:email_generator/pages/result_write_mail/view/result_write_mail.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class SubmitButtonBar extends StatelessWidget {
   final MistralController controller = Get.find<MistralController>();
   final toneController = Get.find<ToneController>();
   final MailLengthController lengthController = Get.find<MailLengthController>();
-  final WriteMailController Writmailcontroller = Get.find<WriteMailController>();
+  final WriteMailController writeMailController = Get.find<WriteMailController>();
 
   final TextEditingController textController;
 
@@ -45,16 +46,16 @@ class SubmitButtonBar extends StatelessWidget {
                   onPressed: controller.isLoading.value
                       ? null
                       : () async {
-                    print("starting working");
+                    log("starting working");
                     if (textController.text.isNotEmpty) {
-                      print("🚀 Prompt: ${textController.text}");
-                      print("🌐 Language: ${Writmailcontroller.selectedLanguage.value}");
-                      print("🎭 Tone: ${toneController.selectedTone.value}");
-                      print("📏 Length: ${lengthController.currentLabel}");
+                      log("🚀 Prompt: ${textController.text}");
+                      log("🌐 Language: ${writeMailController.selectedLanguage.value}");
+                      log("🎭 Tone: ${toneController.selectedTone.value}");
+                      log("📏 Length: ${lengthController.currentLabel}");
 
                       final success = await controller.callMistral(
                         prompt: textController.text,
-                        language: Writmailcontroller.selectedLanguage.value,
+                        language: writeMailController.selectedLanguage.value,
                         tone: toneController.selectedTone.value,
                         length: lengthController.currentLabel,
                       );

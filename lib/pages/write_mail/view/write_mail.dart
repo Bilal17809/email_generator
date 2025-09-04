@@ -2,8 +2,8 @@ import 'package:email_generator/core/constant/constant.dart';
 import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/common/select_lanuage.dart';
-import '../../../core/common/silder.dart';
+import '../../../core/common/select_language.dart';
+import '../../../core/common/length.dart';
 import '../../../core/common/submit_button.dart';
 import '../../../core/common/tones.dart';
 import '../control/controller.dart';
@@ -18,7 +18,7 @@ class WriteMail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.99),
+      backgroundColor:kWhiteEF,
       appBar: Appbar(),
       body: Stack(
         children: [
@@ -49,8 +49,8 @@ class WriteMail extends StatelessWidget {
             right: 0,
             bottom: 0.1,
             child:SubmitButtonBar(
-              greetingsColor: Colors.blue,
-              kWhite: Colors.white,
+              greetingsColor: greetingsColor,
+              kWhite: kWhite,
               textController: textController, // 🔥 shared
             ),
           ),
@@ -87,7 +87,7 @@ class Gridview extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-   Body({super.key, required this.textController});
+   const Body({super.key, required this.textController});
 
   final TextEditingController textController ;
 

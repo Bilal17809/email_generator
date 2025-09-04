@@ -92,7 +92,7 @@ const TextStyle labelSmallStyle = TextStyle(
 //for premium screen
 final BoxDecoration premiumscreenroundecoration = BoxDecoration(
   borderRadius: BorderRadius.circular(10),
-  color: greyColor.withOpacity(0.14),
+  color: greyColor.withValues(alpha: 0.14),
 );
 
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +21,7 @@ class WriteMailController extends GetxController {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("selectedLanguage", lang);
     selectedLanguage.value = lang;
-    print("✅ Saved Language: $lang");
+    log("✅ Saved Language: $lang");
   }
 
   /// Load language from SharedPreferences
@@ -28,7 +30,7 @@ class WriteMailController extends GetxController {
     final savedLang = prefs.getString("selectedLanguage");
     if (savedLang != null) {
       selectedLanguage.value = savedLang;
-      print("🔄 Loaded Language: $savedLang");
+      log("🔄 Loaded Language: $savedLang");
     }
   }
 

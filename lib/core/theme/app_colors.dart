@@ -10,7 +10,7 @@ use in ui
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kWhiteF7 = Color(0xFFF7F7F7);
 const Color kWhiteFA = Color(0xFFFAFAFA);
-const Color kWhiteEF = Color(0xFFEFEFEF);
+Color kWhiteEF = Colors.white.withValues(alpha: 0.99);
 const Color kWhite01 = Color(0x1AFFFFFF);
 
 
@@ -18,7 +18,7 @@ const Color kWhite01 = Color(0x1AFFFFFF);
 //Categories card colors
 const Color greetingsColor = Color(0xff2CA9FB);
 const Color greetingsOffsetColor = Color(0xff14679D);
-Color greetingsColorWithAlpha = const Color(0xFF00B6CD).withOpacity(0.08);
+Color greetingsColorWithAlpha = const Color(0xFF00B6CD).withValues(alpha: 0.08);
 
 
 const Color jobsColor = Color(0xffBB10C1);
@@ -66,14 +66,16 @@ const Color kMintGreen = Color(0xff18C184);
 const Color kMintGreenDark = Color(0xff0F5E42);
 //green
 const greenColor = Color(0xff00AB3F);
-
+Color lightGreen=Colors.green.shade100;
 //red
 const kRed = Color(0xffE1020A);
+Color lightRed=Colors.red.shade50;
 const kLightRed = Color(0xffF9DEDF);
 const kOrange = Color(0xffFF7600);
 const kYellow = Color(0xffFFBB00);
 const kBlue = Color(0xff305DDD);
 const kIndigo = Color(0xff6609A9);
+Color lightPurple=Colors.purple.shade100;
 const kViolet = Color(0xffA900FF);
 const kCoral = Color(0xffFF7F50);
 const kSilver = Color(0xff999898);

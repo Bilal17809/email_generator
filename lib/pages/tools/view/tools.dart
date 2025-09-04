@@ -110,7 +110,7 @@ class Tools extends StatelessWidget {
                         ),
                       ),
                       Card(
-                        color: Colors.green.shade100,
+                        color:lightGreen,
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -125,13 +125,13 @@ class Tools extends StatelessWidget {
                         ),
                       ),
                       Card(
-                        color: Colors.purple.shade100,
+                        color: lightPurple,
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               "Write Email\n"
-                              "Subjectline",
+                              "Subject_line",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -142,7 +142,7 @@ class Tools extends StatelessWidget {
                         ),
                       ),
                       Card(
-                        color: Colors.red.shade50,
+                        color: lightRed,
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [

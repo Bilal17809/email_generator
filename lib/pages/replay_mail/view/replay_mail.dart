@@ -3,8 +3,8 @@ import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../core/common/select_lanuage.dart';
-import '../../../core/common/silder.dart';
+import '../../../core/common/select_language.dart';
+import '../../../core/common/length.dart';
 import '../../../core/common/tones.dart';
 import '../../write_mail/control/controller.dart';
 
@@ -17,7 +17,7 @@ class ReplayMail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.99),
+      backgroundColor:kWhiteEF,
       extendBody: true,
       // 🔹 lets body go behind BottomNavigationBar
       extendBodyBehindAppBar: true,
