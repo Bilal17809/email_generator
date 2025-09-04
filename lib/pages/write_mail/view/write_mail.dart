@@ -36,9 +36,10 @@ class WriteMail extends StatelessWidget {
 
           // 🟨 Scrollable Content
           SingleChildScrollView(
+          padding: EdgeInsets.only(bottom: 80),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Gridview(), Body(), SizedBox(height: 50)],
+              children: [Gridview(), Body(textController: textController), SizedBox(height: 50)],
             ),
           ),
 
@@ -47,9 +48,10 @@ class WriteMail extends StatelessWidget {
             left: 0,
             right: 0,
             bottom: 0.1,
-            child: SubmitButtonBar(
-              greetingsColor: greetingsColor,
-              kWhite: kWhite,
+            child:SubmitButtonBar(
+              greetingsColor: Colors.blue,
+              kWhite: Colors.white,
+              textController: textController, // 🔥 shared
             ),
           ),
         ],
@@ -85,9 +87,9 @@ class Gridview extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
-   Body({super.key});
+   Body({super.key, required this.textController});
 
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController textController ;
 
   @override
   Widget build(BuildContext context) {

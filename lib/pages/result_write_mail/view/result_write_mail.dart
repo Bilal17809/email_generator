@@ -2,15 +2,14 @@ import 'package:email_generator/core/constant/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../../core/common/submit_button.dart';
 import '../../../core/theme/app_colors.dart';
 import '../controller/controller.dart';
 
 class ResultScreen extends StatelessWidget {
+  final String response;
 
-  ResultScreen({super.key});
+   ResultScreen({super.key, required this.response});
   final MistralController controller = Get.put(MistralController());
   final TextEditingController textController = TextEditingController();
 
@@ -83,18 +82,43 @@ class ResultScreen extends StatelessWidget {
 
                       // Show response with GetX
                       Flexible(
-                        flex: 4, // give more space compared to other Expanded/Flexible siblings
+                        flex: 4,
                         child: Obx(() {
                           if (controller.isLoading.value) {
-                            return const Center(child: CircularProgressIndicator());
+                            // ⏳ Loading state
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
                           }
+
+                          if (controller.responseText.value.isEmpty ||
+                              controller.responseText.value == "Type something and press Ask Mistral...") {
+                            // ℹ️ No response yet
+                            return const Center(
+                              child: Text(
+                                "No response yet.\nType your email and press Submit.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 14, color: Colors.grey),
+                              ),
+                            );
+                          }
+
+                          // ✅ AI response
                           return SingleChildScrollView(
-                            padding: const EdgeInsets.all(16), // add padding for breathing room
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.blue.shade50,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              padding: const EdgeInsets.all(12),
                               child: Text(
                                 controller.responseText.value,
-                                style: const TextStyle(fontSize: 10, height: 1),
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  height: 1.5,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           );
@@ -133,9 +157,10 @@ class ResultScreen extends StatelessWidget {
                       Expanded(
                         child: SizedBox(
                           height: context.screenHeight * 0.12,
-                          child: SubmitButtonBar(
-                            greetingsColor: greetingsColor,
-                            kWhite: kWhite,
+                          child:SubmitButtonBar(
+                            greetingsColor: Colors.blue,
+                            kWhite: Colors.white,
+                            textController: textController, // 🔥 shared
                           ),
                         ),
                       ),

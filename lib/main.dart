@@ -1,15 +1,12 @@
 import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:email_generator/pages/home/widget/widget.dart';
-import 'package:email_generator/pages/write_mail/control/controller.dart';
+import 'package:email_generator/pages/injection/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'core/common/silder.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Get.put(WriteMailController());
-  Get.put(MailLengthController());
+  DependencyInjection.init();
   runApp(const MyApp());
 }
 
