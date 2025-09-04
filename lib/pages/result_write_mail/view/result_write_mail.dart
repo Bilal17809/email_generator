@@ -10,7 +10,7 @@ class ResultScreen extends StatelessWidget {
   final String response;
 
    ResultScreen({super.key, required this.response});
-  final MistralController controller = Get.put(MistralController());
+  final controller = Get.find<MistralController>();
   final TextEditingController textController = TextEditingController();
 
   @override

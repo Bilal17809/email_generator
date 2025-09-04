@@ -132,6 +132,7 @@ class Body extends StatelessWidget {
                         ), // ✅ rounded corners
                       ),
                       child: TextField(
+                        keyboardType: TextInputType.emailAddress,
                         controller:textController,
                         decoration: const InputDecoration(
                           hintText: "Type your message...",

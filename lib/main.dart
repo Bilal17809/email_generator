@@ -1,6 +1,6 @@
 import 'package:email_generator/core/theme/app_colors.dart';
 import 'package:email_generator/pages/home/widget/widget.dart';
-import 'package:email_generator/pages/injection/dependency_injection.dart';
+import 'package:email_generator/core/dependency_inject/dependency_injection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

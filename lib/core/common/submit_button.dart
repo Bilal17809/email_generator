@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 import 'package:email_generator/core/common/silder.dart';
 import 'package:email_generator/core/common/tones.dart';
@@ -13,7 +14,7 @@ class SubmitButtonBar extends StatelessWidget {
   final MistralController controller = Get.find<MistralController>();
   final toneController = Get.find<ToneController>();
   final MailLengthController lengthController = Get.find<MailLengthController>();
-  final WriteMailController Writmailcontroller = Get.find<WriteMailController>();
+  final WriteMailController writeMailController = Get.find<WriteMailController>();
 
   final TextEditingController textController;
 
@@ -23,6 +24,8 @@ class SubmitButtonBar extends StatelessWidget {
     required this.kWhite,
     required this.textController,
   });
+
+  // final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,38 +45,59 @@ class SubmitButtonBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-                  onPressed: controller.isLoading.value
-                      ? null
-                      : () async {
-                    print("starting working");
-                    if (textController.text.isNotEmpty) {
-                      print("🚀 Prompt: ${textController.text}");
-                      print("🌐 Language: ${Writmailcontroller.selectedLanguage.value}");
-                      print("🎭 Tone: ${toneController.selectedTone.value}");
-                      print("📏 Length: ${lengthController.currentLabel}");
+              onPressed: controller.isLoading.value
+                  ? null
+                  : () async {
+                // Validate email before sending to AI
+                final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                final email = textController.text.trim();
 
-                      final success = await controller.callMistral(
-                        prompt: textController.text,
-                        language: Writmailcontroller.selectedLanguage.value,
-                        tone: toneController.selectedTone.value,
-                        length: lengthController.currentLabel,
-                      );
+                if (email.isEmpty) {
+                  Get.snackbar(
+                    "Error",
+                    "Email cannot be empty",
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                  return;
+                }
 
-                      if (success) {
-                        Get.to(() => ResultScreen(
-                          response: controller.responseText.value,
-                        ));
-                      } else {
-                        Get.snackbar(
-                          "Error",
-                          "Failed to generate response",
-                          snackPosition: SnackPosition.BOTTOM,
-                        );
-                      }
-                    }
-                  },
+                if (!emailRegex.hasMatch(email)) {
+                  Get.snackbar(
+                    "Error",
+                    "Enter a valid email",
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                  return;
+                }
 
-                  child: controller.isLoading.value
+
+                log("🚀 Prompt: $email");
+                log("🌐 Language: ${writeMailController.selectedLanguage.value}");
+                log("🎭 Tone: ${toneController.selectedTone.value}");
+                log("📏 Length: ${lengthController.currentLabel}");
+
+                // Call Mistral AI
+                final success = await controller.callMistral(
+                  prompt: email,
+                  language: writeMailController.selectedLanguage.value,
+                  tone: toneController.selectedTone.value,
+                  length: lengthController.currentLabel,
+                );
+
+                if (success) {
+                  // Navigate to AI response screen
+                  Get.to(() => ResultScreen(
+                    response: controller.responseText.value,
+                  ));
+                } else {
+                  Get.snackbar(
+                    "Error",
+                    "Failed to generate response",
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              },
+              child: controller.isLoading.value
                   ? const SizedBox(
                 height: 24,
                 width: 24,
@@ -86,7 +110,7 @@ class SubmitButtonBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 10),
-                  Text("Submit", style: TextStyle(color: kWhite)),
+                  Text("Submit", style: context.textTheme.bodyLarge?.copyWith(color: kWhite)),
                   const SizedBox(width: 8),
                   Transform.rotate(
                     angle: -math.pi / 4,
@@ -101,6 +125,7 @@ class SubmitButtonBar extends StatelessWidget {
     );
   }
 }
+
 
 
 
