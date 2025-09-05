@@ -140,7 +140,7 @@ class ResultScreen extends StatelessWidget {
                                    final Uri emailUri = Uri(
                                      scheme: 'mailto',
                                      path: '',
-                                     query: Uri.encodeFull('subject=AI Response&body=$emailBody'),
+                                     query: Uri.encodeFull('subject= &body=$emailBody'),
                                    );
 
                                    if (await canLaunchUrl(emailUri)) {

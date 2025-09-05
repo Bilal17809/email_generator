@@ -21,52 +21,57 @@ lib/
 │   └── routes/          # Navigation and route handling
 │
 └── main.dart
-import 'package:get/get.dart';
-import '../../../domain/usecases/send_message_usecase.dart';
-
-class MistralController extends GetxController {
-  var responseText = "Type something and press Ask Mistral...".obs;
-  var isLoading = false.obs;
-
-  final SendMessageUseCase sendMessageUseCase;
-
-  // Inject the use case via constructor
-  MistralController(this.sendMessageUseCase);
-
-  Future<bool> callMistral({
+Future<bool> callMistral({
     required String prompt,
     required String language,
     required String tone,
     required String length,
   }) async {
+    // 📝 Strong instruction for AI
+    final instruction = """
+You are an AI email writing assistant.
+
+Your task:
+- Rewrite the user’s draft into a full, natural, professional email.
+- Always write the ENTIRE email in the $language language (do not use English).
+- Use a $tone tone.
+- Length should be $length (Short ≈ 50 words, Medium ≈ 100 words, Long ≈ 200 words).
+
+User’s draft:
+"$prompt"
+""";
+
+
+    // 🎚 Map length → tokens
+    final int maxTokens = length.toLowerCase() == "short"
+        ? 75
+        : length.toLowerCase() == "medium"
+        ? 150
+        : 300;
+
+    final body = {
+      "model": "mistral-small-latest",
+      "messages": [
+        {"role": "system", "content": "You are a helpful email assistant."},
+        {"role": "user", "content": instruction},
+      ],
+      "temperature": 0.7,
+      "max_tokens": maxTokens,
+    };
+
     isLoading.value = true;
     responseText.value = "⏳ Thinking...";
 
-    // 📝 Build instruction string for AI
-    final instruction = """
-Write an email in $language with a $tone tone and $length length.
-Here is the user's draft content: "$prompt"
-""";
-
-    // 🎚 Decide maxTokens based on length
-    final maxTokens = length.toLowerCase() == "short"
-        ? 50
-        : length.toLowerCase() == "medium"
-            ? 100
-            : 200;
-
     try {
-      // ✅ Call the use case
-      final aiResponse =
-          await sendMessageUseCase(instruction, maxTokens: maxTokens);
-
-      responseText.value = aiResponse;
+      final data = await apiClient.post(ApiRoutes.chatCompletions, body);
+      responseText.value = data["choices"][0]["message"]["content"];
+      log("✅ Success: ${responseText.value}");
       return true;
     } catch (e) {
-      responseText.value = "❌ Exception: $e";
+      responseText.value = "Exception: $e";
+      log("❌ Error: $e");
       return false;
     } finally {
       isLoading.value = false;
     }
   }
-}

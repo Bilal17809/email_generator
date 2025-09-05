@@ -9,8 +9,8 @@ import '../../../core/common/tones.dart';
 import '../../write_mail/control/controller.dart';
 
 
-class ReplayMail extends StatelessWidget {
-  ReplayMail({super.key});
+class CreateSummary extends StatelessWidget {
+  CreateSummary({super.key});
 
   final WriteMailController controller = Get.put(WriteMailController());
 
@@ -91,7 +91,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
           size: 30,
         ),
       ),
-      title: Text("Replay Mail", style: TextStyle(color: greetingsColor)),
+      title: Text("Create Summary", style: TextStyle(color: greetingsColor)),
     );
   }
 
@@ -142,7 +142,7 @@ class Body extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 10.0, top: 13),
             child: Text(
-              "Replay Email Assistant",
+              "Enter text here",
               style: TextStyle(color: kWhite, fontSize: 20),
             ),
           ),

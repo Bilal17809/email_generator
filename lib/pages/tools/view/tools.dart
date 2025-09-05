@@ -1,5 +1,9 @@
 import 'package:email_generator/core/constant/constant.dart';
 import 'package:email_generator/core/theme/app_colors.dart';
+import 'package:email_generator/pages/cold_email/view/cold_email.dart';
+import 'package:email_generator/pages/create_summary/view/create_summary.dart';
+import 'package:email_generator/pages/email_subject_line/view/email_subject_line.dart';
+import 'package:email_generator/pages/fix_grammer/view/fix_grammar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,68 +97,88 @@ class Tools extends StatelessWidget {
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      Card(
-                        color: Colors.pink.shade50,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Create personalized \n"
-                              "Cold Email",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                      InkWell(
+                       onTap: (){
+                         Get.to(()=>ColdEmail());
+                       },
+                        child: Card(
+                          color: Colors.pink.shade50,
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Create personalized \n"
+                                "Cold Email",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      Card(
-                        color: Colors.green.shade100,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Fix Grammar",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: (){
+                          Get.to(()=>FixGrammar());
+                        },
+                        child: Card(
+                          color: Colors.green.shade100,
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Fix Grammar",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      Card(
-                        color: Colors.purple.shade100,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Write Email\n"
-                              "Subjectline",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: (){
+                          Get.to(()=>EmailSubjectLine());
+                        },
+                        child: Card(
+                          color: Colors.purple.shade100,
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Write Email\n"
+                                "Subjectline",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      Card(
-                        color: Colors.red.shade50,
-                        child: Column(
-                          // mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Create Summary",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                      InkWell(
+                        onTap: (){
+                          Get.to(()=>CreateSummary());
+                        },
+                        child: Card(
+                          color: Colors.red.shade50,
+                          child: Column(
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Create Summary",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
 
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],

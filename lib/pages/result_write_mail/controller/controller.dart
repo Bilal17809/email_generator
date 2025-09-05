@@ -60,7 +60,7 @@ class MistralController extends GetxController {
   // Inject the use case via constructor
   MistralController(this.sendMessageUseCase);
 
-  /*Future<bool> callMistral({
+  Future<bool> callMistral({
     required String prompt,
     required String language,
     required String tone,
@@ -69,14 +69,17 @@ class MistralController extends GetxController {
     isLoading.value = true;
     responseText.value = "⏳ Thinking...";
 
-    // 📝 Build instruction string for AI
     final instruction = """
-You are an assistant that always writes emails.
-The output MUST be in $language only.
-Tone: $tone
-Length: $length
+You are an AI email writing assistant.
+  
+Your task:
+- Rewrite the user’s draft into a full, natural, professional email.  
+- Always write the ENTIRE email in the $language language (do not use English).  
+- Use a $tone tone.  
+- Length should be $length (Short ≈ 50 words, Medium ≈ 100 words, Long ≈ 200 words).  
 
-User's input: "$prompt"
+User’s draft:
+"$prompt"
 """;
 
 
@@ -100,60 +103,8 @@ User's input: "$prompt"
     } finally {
       isLoading.value = false;
     }
-  }*/
-  Future<bool> callMistral({
-    required String prompt,
-    required String language,
-    required String tone,
-    required String length,
-  }) async {
-    isLoading.value = true;
-    responseText.value = "⏳ Thinking...";
-
-    // Step 1: Build email draft instruction
-    final instruction = """
-You are an assistant that always writes emails.
-Tone: $tone
-Length: $length
-
-User's input: "$prompt"
-""";
-
-    // Step 2: Decide tokens based on length
-    final maxTokens = length.toLowerCase() == "short"
-        ? 50
-        : length.toLowerCase() == "medium"
-        ? 100
-        : 200;
-
-    try {
-      // Step 3: Generate first draft (default, usually English)
-      final aiResponse =
-      await sendMessageUseCase(instruction, maxTokens: maxTokens);
-
-      // Step 4: If the user chose a non-English language, translate
-      if (language.toLowerCase() != "english") {
-        final translationPrompt = """
-Translate the following email into **$language**.
-Only output the translated email text, no explanations.
-
-$aiResponse
-""";
-
-        responseText.value =
-        await sendMessageUseCase(translationPrompt, maxTokens: 300);
-      } else {
-        responseText.value = aiResponse;
-      }
-
-      return true;
-    } catch (e) {
-      responseText.value = "❌ Exception: $e";
-      return false;
-    } finally {
-      isLoading.value = false;
-    }
   }
+
 
 }
 

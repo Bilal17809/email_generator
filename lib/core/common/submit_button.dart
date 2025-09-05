@@ -47,58 +47,78 @@ class SubmitButtonBar extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              onPressed: controller.isLoading.value
-                  ? null
-                  : () async {
-                // Validate email before sending to AI
-                final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-                final email = textController.text.trim();
+                  onPressed: controller.isLoading.value
+                      ? null
+                      : () async {
+                    final emailRegex =
+                    RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                    final email = textController.text.trim();
 
-                if (email.isEmpty) {
-                  Get.snackbar(
-                    "Error",
-                    "Email cannot be empty",
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                  return;
-                }
+                    // 🛑 Empty
+                    if (email.isEmpty) {
+                      Get.snackbar(
+                        "Error",
+                        "Email cannot be empty",
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                      return;
+                    }
 
-                if (!emailRegex.hasMatch(email)) {
-                  Get.snackbar(
-                    "Error",
-                    "Enter a valid email",
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                  return;
-                }
+                    // 🛑 Invalid format
+                    if (!emailRegex.hasMatch(email)) {
+                      Get.snackbar(
+                        "Error",
+                        "Enter a valid email format",
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                      return;
+                    }
 
+                    // 🛑 Block dummy/disposable domains
+                    final blockedDomains = [
+                      "example.com",
+                      "test.com",
+                      "mailinator.com",
+                      "tempmail.com",
+                      "fake.com",
+                    ];
+                    final domain = email.split('@').last.toLowerCase();
 
-                log("🚀 Prompt: $email");
-                log("🌐 Language: ${writeMailController.selectedLanguage.value}");
-                log("🎭 Tone: ${toneController.selectedTone.value}");
-                log("📏 Length: ${lengthController.currentLabel}");
+                    if (blockedDomains.contains(domain)) {
+                      Get.snackbar(
+                        "Error",
+                        "Please use a real email provider, not a dummy one",
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                      return;
+                    }
 
-                // Call Mistral AI
-                final success = await controller.callMistral(
-                  prompt: email,
-                  language: writeMailController.selectedLanguage.value,
-                  tone: toneController.selectedTone.value,
-                  length: lengthController.currentLabel,
-                );
+                    // ✅ Passed validation
+                    log("🚀 Prompt: $email");
+                    log("🌐 Language: ${writeMailController.selectedLanguage.value}");
+                    log("🎭 Tone: ${toneController.selectedTone.value}");
+                    log("📏 Length: ${lengthController.currentLabel}");
 
-                if (success) {
-                  // Navigate to AI response screen
-                  Get.to(() => ResultScreen(
-                    response: controller.responseText.value,
-                  ));
-                } else {
-                  Get.snackbar(
-                    "Error",
-                    "Failed to generate response",
-                    snackPosition: SnackPosition.BOTTOM,
-                  );
-                }
-              },
+                    final success = await controller.callMistral(
+                      prompt: email,
+                      language: writeMailController.selectedLanguage.value,
+                      tone: toneController.selectedTone.value,
+                      length: lengthController.currentLabel,
+                    );
+
+                    if (success) {
+                      Get.to(() => ResultScreen(
+                        response: controller.responseText.value,
+                      ));
+                    } else {
+                      Get.snackbar(
+                        "Error",
+                        "Failed to generate response",
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    }
+                  }
+                  ,
               child: controller.isLoading.value
                   ? const SizedBox(
                 height: 24,
@@ -128,6 +148,36 @@ class SubmitButtonBar extends StatelessWidget {
   }
 }
 
+class EmailValidatorHelper {
+  static final RegExp _emailRegex =
+  RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+  // Block dummy/disposable domains
+  static final List<String> _blockedDomains = [
+    "example.com",
+    "test.com",
+    "mailinator.com",
+    "tempmail.com",
+    "fake.com",
+  ];
+
+  static String? validate(String email) {
+    if (email.isEmpty) {
+      return "Email cannot be empty";
+    }
+
+    if (!_emailRegex.hasMatch(email)) {
+      return "Enter a valid email format";
+    }
+
+    final domain = email.split('@').last.toLowerCase();
+    if (_blockedDomains.contains(domain)) {
+      return "Please use a real email provider, not a dummy one";
+    }
+
+    return null; // ✅ valid email
+  }
+}
 
 
 

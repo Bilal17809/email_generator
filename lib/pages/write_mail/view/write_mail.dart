@@ -43,7 +43,6 @@ class WriteMail extends StatelessWidget {
             ),
           ),
 
-          // 🟥 Button fixed at bottom (always on top)
           Positioned(
             left: 0,
             right: 0,
