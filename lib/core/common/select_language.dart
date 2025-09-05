@@ -192,131 +192,8 @@ class LanguageSelector extends StatelessWidget {
   }
 
 
-  /// ✅ Private method for bottom sheet
-  // void _openDraggableBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //     context: context,
-  //     isScrollControlled: true,
-  //     backgroundColor: Colors.transparent,
-  //     builder: (_) {
-  //       return Obx(() {
-  //         final filteredLanguages = languages
-  //             .where((lang) => lang["name"]!
-  //             .toLowerCase()
-  //             .contains(controller.searchQuery.value.toLowerCase()))
-  //             .toList();
-  //
-  //         final selected = languages.firstWhereOrNull(
-  //               (lang) => lang["name"] == controller.selectedLanguage.value,
-  //         );
-  //
-  //         final otherList = filteredLanguages
-  //             .where(
-  //                 (lang) => lang["name"] != controller.selectedLanguage.value)
-  //             .toList();
-  //
-  //         return Container(
-  //           height: MediaQuery.of(context).size.height * 0.7,
-  //           decoration: const BoxDecoration(
-  //             color: Colors.white,
-  //             borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-  //           ),
-  //           child: Column(
-  //             children: [
-  //               const Padding(
-  //                 padding: EdgeInsets.all(12.0),
-  //                 child: Text(
-  //                   "Select language",
-  //                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-  //                 ),
-  //               ),
-  //
-  //               // 🔍 Search
-  //               SizedBox(
-  //                 width: context.width * 0.86,
-  //                 height: 50,
-  //                 child: TextField(
-  //                   onChanged: controller.updateSearch,
-  //                   decoration: InputDecoration(
-  //                     hintText: "Search language...",
-  //                     prefixIcon:
-  //                     Icon(Icons.search, color: greetingsColor),
-  //                     filled: true,
-  //                     fillColor: kWhite,
-  //                     border: OutlineInputBorder(
-  //                       borderRadius: BorderRadius.circular(20),
-  //                       borderSide: BorderSide(
-  //                         color: greetingsColor,
-  //                         width: 0.5,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               const SizedBox(height: 10),
-  //
-  //               // ✅ Scrollable list
-  //               Expanded(
-  //                 child: ListView(
-  //                   children: [
-  //                     if (selected != null) ...[
-  //                       const Padding(
-  //                         padding: EdgeInsets.all(8.0),
-  //                         child: Text(
-  //                           "Selected Language",
-  //                           style: TextStyle(
-  //                             fontSize: 16,
-  //                             fontWeight: FontWeight.bold,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       ListTile(
-  //                         leading: Text(selected["flag"]!,
-  //                             style: const TextStyle(fontSize: 22)),
-  //                         title: Text(selected["name"]!),
-  //                         trailing: const Icon(
-  //                           Icons.check_circle,
-  //                           size: 18,
-  //                           color: Colors.green,
-  //                         ),
-  //                         onTap: () =>
-  //                             controller.selectLanguage(selected["name"]!),
-  //                       ),
-  //                       const SizedBox(height: 10),
-  //                     ],
-  //
-  //                     const Padding(
-  //                       padding: EdgeInsets.all(8.0),
-  //                       child: Text(
-  //                         "Other Languages",
-  //                         style: TextStyle(
-  //                           fontSize: 16,
-  //                           fontWeight: FontWeight.bold,
-  //                         ),
-  //                       ),
-  //                     ),
-  //
-  //                     ...otherList.map(
-  //                           (lang) => ListTile(
-  //                         leading: Text(lang["flag"]!,
-  //                             style: const TextStyle(fontSize: 22)),
-  //                         title: Text(lang["name"]!),
-  //                         onTap: () =>
-  //                             controller.selectLanguage(lang["name"]!),
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  //     },
-  //   );
-  // }
 }
-/// ✅ Convert country ISO code to emoji flag
+
 String countryCodeToEmoji(String countryCode) {
   return countryCode.toUpperCase().replaceAllMapped(
     RegExp(r'[A-Z]'),
@@ -324,8 +201,7 @@ String countryCodeToEmoji(String countryCode) {
   );
 }
 
-/// ✅ Language data
-/// ✅ Language data
+
 final Map<String, String> languageCodes = {
   'English': 'en',
   'French': 'fr',
@@ -372,7 +248,7 @@ final Map<String, String> languageFlags = {
   'Norwegian': 'NO',
   'Polish': 'PL',
   'Portuguese': 'PT',
-  'Punjabi': 'PK',
+  'Punjabi': 'IN',
   'Romanian': 'RO',
   'Russian': 'RU',
   'Spanish': 'ES',

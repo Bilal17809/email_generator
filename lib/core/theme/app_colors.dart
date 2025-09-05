@@ -10,7 +10,7 @@ use in ui
 const Color kWhite = Color(0xFFFFFFFF);
 const Color kWhiteF7 = Color(0xFFF7F7F7);
 const Color kWhiteFA = Color(0xFFFAFAFA);
-const Color kWhiteEF = Color(0xFFEFEFEF);
+ Color kWhiteEF = Colors.white.withValues(alpha: 0.99);
 const Color kWhite01 = Color(0x1AFFFFFF);
 
 
@@ -18,7 +18,7 @@ const Color kWhite01 = Color(0x1AFFFFFF);
 //Categories card colors
 const Color greetingsColor = Color(0xff2CA9FB);
 const Color greetingsOffsetColor = Color(0xff14679D);
-Color greetingsColorWithAlpha = const Color(0xFF00B6CD).withOpacity(0.08);
+Color greetingsColorWithAlpha = const Color(0xFF00B6CD).withValues(alpha:0.08);
 
 
 const Color jobsColor = Color(0xffBB10C1);

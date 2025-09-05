@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:math' as math;
-import 'package:email_generator/core/common/silder.dart';
+import 'package:email_generator/core/common/slider.dart';
 import 'package:email_generator/core/common/tones.dart';
 import 'package:email_generator/pages/result_write_mail/view/result_write_mail.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +11,7 @@ import '../../pages/write_mail/control/controller.dart';
 class SubmitButtonBar extends StatelessWidget {
   final Color greetingsColor;
   final Color kWhite;
+  final String text;
   final MistralController controller = Get.find<MistralController>();
   final toneController = Get.find<ToneController>();
   final MailLengthController lengthController = Get.find<MailLengthController>();
@@ -23,6 +24,7 @@ class SubmitButtonBar extends StatelessWidget {
     required this.greetingsColor,
     required this.kWhite,
     required this.textController,
+    required this.text,
   });
 
   // final _formKey = GlobalKey<FormState>();
@@ -110,7 +112,7 @@ class SubmitButtonBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 10),
-                  Text("Submit", style: context.textTheme.bodyLarge?.copyWith(color: kWhite)),
+                  Text(text, style: context.textTheme.bodyLarge?.copyWith(color: kWhite)),
                   const SizedBox(width: 8),
                   Transform.rotate(
                     angle: -math.pi / 4,

@@ -1,4 +1,4 @@
-import '../../../core/config/api_routes.dart';
+
 import '../../core/network/api_client.dart';
 
 class MistralRemoteDataSource {
@@ -16,7 +16,12 @@ class MistralRemoteDataSource {
       "max_tokens": maxTokens,
     };
 
-    final data = await _apiClient.post(ApiRoutes.apiKey, body);
+    // final data = await _apiClient.post(ApiRoutes.apiKey, body);
+    final data = await _apiClient.post(
+      "/chat/completions", // ✅ correct endpoint
+      body,
+    );
+
     return data['choices'][0]['message']['content'];
   }
 

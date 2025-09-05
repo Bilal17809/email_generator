@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 class ApiClient {
@@ -26,6 +27,8 @@ class ApiClient {
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
     } else {
+      log("❌ API Error: ${response.statusCode}");
+      log("❌ Response Body: ${response.body}");
       throw Exception("#############> API Error ${response.statusCode}: ${response.body}");
     }
   }

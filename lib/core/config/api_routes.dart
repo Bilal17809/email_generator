@@ -1,3 +1,3 @@
 class ApiRoutes{
-  static const apiKey="0zonSPwAyXd4g8K7JeIg8tFQQe0TEEQe";
+  static const apiKey="kPEeKbvH56YPk5yb0sJnNRf0uhjExjSx";
 }
